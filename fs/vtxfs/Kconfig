@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config VTXFS_FS
+	tristate "VTXFS v2.1 P0.6 filesystem (experimental CoW filesystem)"
+	depends on BLOCK
+	select CRC32
+	select CRYPTO
+	select CRYPTO_AEAD
+	select CRYPTO_AES
+	select CRYPTO_GCM
+	select CRYPTO_CHACHA20POLY1305
+	select ZLIB_DEFLATE
+	select ZLIB_INFLATE
+	select LZ4_COMPRESS
+	select LZ4_DECOMPRESS
+	select ZSTD_COMPRESS
+	select ZSTD_DECOMPRESS
+	help
+	  VTXFS v2.1 single-device copy-on-write filesystem with
+	  BLAKE3 metadata checksums, per-block CRC32C data checksums,
+	  snapshots, safe-free queue and crash-resumable reaper.
+
+	  Includes VFS adapter, subvolume mount (-o subvol=), FIEMAP,
+	  NFS export, O_DIRECT read, batched writepages, xattrs, ioctls,
+	  and native kernel ctree/transaction subsystems.
+
+	  To compile as a module, choose M here: the module is called vtxfs.
+
+config VTXFS_KUNIT_TEST
+	tristate "KUnit test for VTXFS kernel ctree & leaf" if !KUNIT_ALL_TESTS
+	depends on KUNIT && VTXFS_FS
+	default KUNIT_ALL_TESTS
+	help
+	  This builds the KUnit test suite for VTXFS kernel-side ctree,
+	  leaf manipulation, extent_io, and checksum routines.
+
+config VTXFS_E2E_TEST
+	tristate "End-to-end self-test module for VTXFS"
+	depends on VTXFS_FS
+	help
+	  This builds the end-to-end self-test kernel module (vtxfs_e2e.ko)
+	  which formats an in-kernel RAM disk, mounts natively, exercises
+	  multi-level ctree mutations (split, merge, rebalance, CoW), and
+	  verifies the disk state with the engine fsck.
+

@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-2.0-only
+# VTXFS M0–M6 stage runner. Runs only on disposable /dev/shm images and QEMU.
+set -euo pipefail
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$root"
+stage="${1:-help}"
+
+tools_build() {
+  make -C tools mkfs.vtxfs vtxfs-inspect fsck.vtxfs -j2
+}
+kernel_build() {
+  make -C "/lib/modules/$(uname -r)/build" M="$root/../fs/vtxfs" CONFIG_VTXFS_FREE_CACHE_TEST=m modules -j2
+}
+case "$stage" in
+  m0)
+    tools_build
+    python3 -u tests/test_m0_golden.py
+    ;;
+  m1)
+    tools_build
+    kernel_build
+    ./tests/run_vm_smoke.sh
+    ./tests/run_vm_human.sh
+    python3 -u tests/run_vm_orphan_crash.py
+    ;;
+  m2)
+    # P0 suite tests all seven checkpoint fault points.
+    TMPDIR=/dev/shm bash tests/run.sh
+    kernel_build
+    python3 -u tests/run_vm_crash.py
+    ;;
+  m3)
+    tools_build
+    python3 -u tests/test_terminal_capacity.py
+    ;;
+  m4)
+    kernel_build
+    python3 tests/test_kernel_backref_contract.py
+    tools_build
+    python3 -u tests/test_m4_snapshot_refs.py
+    echo 'M4: snapshot REF/SFQ verified; complete persisted reverse-owner graph NOT IMPLEMENTED.'
+    ;;
+  m5)
+    tools_build
+    python3 -u tests/test_terminal_edges.py
+    python3 -u tests/test_terminal_commands_extended.py
+    python3 -u tests/test_terminal_commands_negative.py
+    python3 -u tests/test_human_journey_terminal.py
+    kernel_build
+    VTXFS_VM_MODE=stress ./tests/run_vm_smoke.sh
+    ./tests/run_vm_human.sh
+    python3 -u tests/run_vm_orphan_crash.py
+    ;;
+  m6)
+    tools_build
+    kernel_build
+    ./tests/run_vm_smoke.sh
+    VTXFS_VM_MODE=stress ./tests/run_vm_smoke.sh
+    ./tests/run_vm_human.sh
+    python3 -u tests/benchmark_checkpoint_8MiB.py
+    python3 -u tests/test_terminal_capacity.py
+    ;;
+  quick)
+    tools_build
+    python3 -u tests/test_m0_golden.py
+    python3 -u tests/test_terminal_edges.py
+    kernel_build
+    ./tests/run_vm_smoke.sh
+    VTXFS_VM_MODE=stress ./tests/run_vm_smoke.sh
+    python3 -u tests/run_vm_crash.py
+    ./tests/run_vm_human.sh
+    python3 -u tests/run_vm_orphan_crash.py
+    ;;
+  full)
+    tools_build
+    python3 -u tests/test_m0_golden.py
+    TMPDIR=/dev/shm bash tests/run.sh
+    python3 -u tests/test_terminal_full_matrix.py
+    python3 -u tests/test_terminal_edges.py
+    python3 -u tests/test_terminal_commands_extended.py
+    python3 -u tests/test_terminal_commands_negative.py
+    python3 -u tests/test_human_journey_terminal.py
+    kernel_build
+    python3 tests/test_kernel_backref_contract.py
+    python3 -u tests/test_m4_snapshot_refs.py
+    ./tests/run_vm_smoke.sh
+    VTXFS_VM_MODE=stress ./tests/run_vm_smoke.sh
+    python3 -u tests/run_vm_crash.py
+    ./tests/run_vm_human.sh
+    python3 -u tests/run_vm_orphan_crash.py
+    python3 -u tests/benchmark_checkpoint_8MiB.py
+    python3 -u tests/test_terminal_capacity.py
+    ;;
+  *)
+    echo "Usage: tools/vtxfs-dev-check {m0|m1|m2|m3|m4|m5|m6|quick|full}"
+    echo "  m4 verifies symbols only; it does not enable on-disk backref protocol."
+    exit 2
+    ;;
+esac
+echo "VTXFS_STAGE_DONE $stage"

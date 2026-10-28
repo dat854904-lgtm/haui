@@ -1,0 +1,31 @@
+[    0.104190] full-width counters, Intel PMU driver.
+[    0.131021] virt/tdx: TDX not supported by the host platform
+[    0.326934] ACPI: IRQ 4 override to edge(!), high(!)
+VTXFS_VM_BOOT PID=1
+VTXFS_VM_DEP_OK /deps/aead.ko
+VTXFS_VM_DEP_OK /deps/lz4hc_compress.ko
+[    0.746252] vtxfs_free_cache_test: loading out-of-tree module taints kernel.
+VTXFS_VM_M3_CACHE_MODULE_LOADED
+VTXFS_VM_MOUNT_OK
+VTXFS_VM_HUMAN_BEGIN
+VTXFS_VM_HUMAN_OK item=symlink_follow_read
+VTXFS_VM_HUMAN_OK item=user_xattr
+VTXFS_VM_HUMAN_OK item=chmod_unprivileged_denied
+VTXFS_VM_HUMAN_OK item=statfs_inode_free
+VTXFS_VM_HUMAN_OK item=hardlink_nlink_unlink_survivor
+VTXFS_VM_HUMAN_OK item=fallocate_keeps_existing
+VTXFS_VM_HUMAN_OK item=fallocate_real_8KiB
+VTXFS_VM_HUMAN_OK item=fallocate_keep_size_rejected
+VTXFS_VM_HUMAN_OK item=append
+VTXFS_VM_HUMAN_OK item=unlink_open_fd_read
+VTXFS_VM_HUMAN_OK item=rename_open_target_fd_read
+VTXFS_VM_HUMAN_OK item=rename_reopen_new_content
+VTXFS_VM_HUMAN_OK item=second_volume_mount
+VTXFS_VM_HUMAN_OK item=readonly_snapshot_vfs
+VTXFS_VM_HUMAN_OK item=copy_file_range_dirty_mmap_and_old_cache
+VTXFS_VM_HUMAN_OK item=fsync_clean_no_extra_block_writes
+VTXFS_VM_HUMAN_OK item=sequential_cold_256KiB
+VTXFS_VM_HUMAN_FINISHED defects=0 missing=0
+VTXFS_VM_UMOUNT_OK
+VTXFS_VM_PASS failures=0
+[    0.877010] reboot: Power down

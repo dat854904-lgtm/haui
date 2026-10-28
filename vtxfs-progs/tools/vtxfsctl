@@ -1,0 +1,9 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-2.0-only
+# VTXFS terminal-first file manager.
+set -eu
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+if [ ! -x "$ROOT/tools/vtxfs-inspect" ] || [ ! -x "$ROOT/tools/fsck.vtxfs" ]; then
+    make -C "$ROOT/tools" vtxfs-inspect fsck.vtxfs
+fi
+exec python3 "$ROOT/tools/vtxfsctl.py" "$@"

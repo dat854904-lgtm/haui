@@ -1,0 +1,396 @@
+{
+  "device": "/dev/sdb2",
+  "timestamp": "2026-10-27 10:43:57",
+  "operations": [
+    {
+      "category": "1. Định dạng",
+      "operation": "mkfs.vtxfs (29 GiB)",
+      "count": 1,
+      "total_sec": 2.7369,
+      "per_op_ms": 2736.896,
+      "per_op_us": 2736896.0,
+      "ops_sec": 0.4,
+      "note": "7,613,952 khối, Superblock 0/1, VAG ring"
+    },
+    {
+      "category": "1. Định dạng",
+      "operation": "fsck.vtxfs ban đầu",
+      "count": 1,
+      "total_sec": 0.142,
+      "per_op_ms": 141.972,
+      "per_op_us": 141971.9,
+      "ops_sec": 7.0,
+      "note": "Kiểm tra cấu trúc sạch 100%"
+    },
+    {
+      "category": "2. Khởi tạo",
+      "operation": "insmod vtxfs.ko",
+      "count": 1,
+      "total_sec": 0.0255,
+      "per_op_ms": 25.506,
+      "per_op_us": 25505.5,
+      "ops_sec": 39.2,
+      "note": "Nạp kernel driver vào nhân Linux"
+    },
+    {
+      "category": "2. Khởi tạo",
+      "operation": "mount -t vtxfs (RW)",
+      "count": 1,
+      "total_sec": 0.2842,
+      "per_op_ms": 284.223,
+      "per_op_us": 284223.0,
+      "ops_sec": 3.5,
+      "note": "Đọc Superblock, nạp CPD ring và OMAP"
+    },
+    {
+      "category": "3. Thư mục",
+      "operation": "mkdir (tạo 100 thư mục)",
+      "count": 100,
+      "total_sec": 0.0052,
+      "per_op_ms": 0.052,
+      "per_op_us": 52.1,
+      "ops_sec": 19200.1,
+      "note": "19200.1 dirs/s"
+    },
+    {
+      "category": "3. Thư mục",
+      "operation": "rmdir (xoá 100 thư mục)",
+      "count": 100,
+      "total_sec": 0.0039,
+      "per_op_ms": 0.039,
+      "per_op_us": 39.2,
+      "ops_sec": 25511.9,
+      "note": "25511.9 dirs/s"
+    },
+    {
+      "category": "4. Metadata",
+      "operation": "create / touch (100 files)",
+      "count": 100,
+      "total_sec": 0.0061,
+      "per_op_ms": 0.061,
+      "per_op_us": 61.4,
+      "ops_sec": 16287.8,
+      "note": "16287.8 files/s"
+    },
+    {
+      "category": "4. Metadata",
+      "operation": "stat / getattr (100 files)",
+      "count": 100,
+      "total_sec": 0.0003,
+      "per_op_ms": 0.003,
+      "per_op_us": 2.6,
+      "ops_sec": 390576.2,
+      "note": "390576.2 stats/s"
+    },
+    {
+      "category": "4. Metadata",
+      "operation": "chmod (100 files)",
+      "count": 100,
+      "total_sec": 0.001,
+      "per_op_ms": 0.01,
+      "per_op_us": 10.3,
+      "ops_sec": 97455.1,
+      "note": "97455.1 chmods/s"
+    },
+    {
+      "category": "4. Metadata",
+      "operation": "utimes (100 files)",
+      "count": 100,
+      "total_sec": 0.0014,
+      "per_op_ms": 0.014,
+      "per_op_us": 14.0,
+      "ops_sec": 71330.1,
+      "note": "71330.1 utimes/s"
+    },
+    {
+      "category": "5. Liên kết",
+      "operation": "hardlink link() (50 files)",
+      "count": 50,
+      "total_sec": 0.0026,
+      "per_op_ms": 0.051,
+      "per_op_us": 51.5,
+      "ops_sec": 19418.0,
+      "note": "nlink=2"
+    },
+    {
+      "category": "5. Liên kết",
+      "operation": "symlink symlink() (50 files)",
+      "count": 50,
+      "total_sec": 0.0051,
+      "per_op_ms": 0.102,
+      "per_op_us": 102.3,
+      "ops_sec": 9776.2,
+      "note": "9776.2 links/s"
+    },
+    {
+      "category": "5. Liên kết",
+      "operation": "readlink (50 files)",
+      "count": 50,
+      "total_sec": 0.0008,
+      "per_op_ms": 0.015,
+      "per_op_us": 15.3,
+      "ops_sec": 65499.6,
+      "note": "65499.6 readlinks/s"
+    },
+    {
+      "category": "5. Đổi tên",
+      "operation": "rename (50 files)",
+      "count": 50,
+      "total_sec": 0.011,
+      "per_op_ms": 0.22,
+      "per_op_us": 220.3,
+      "ops_sec": 4539.6,
+      "note": "4539.6 renames/s"
+    },
+    {
+      "category": "5. Xoá tệp",
+      "operation": "unlink (200 files)",
+      "count": 200,
+      "total_sec": 0.0189,
+      "per_op_ms": 0.095,
+      "per_op_us": 94.5,
+      "ops_sec": 10581.1,
+      "note": "10581.1 unlinks/s"
+    },
+    {
+      "category": "6. I/O Nội tuyến",
+      "operation": "Ghi inline 1 KiB (50 files)",
+      "count": 50,
+      "total_sec": 0.0036,
+      "per_op_ms": 0.073,
+      "per_op_us": 72.9,
+      "ops_sec": 13718.2,
+      "note": "13718.2 writes/s"
+    },
+    {
+      "category": "6. I/O Nội tuyến",
+      "operation": "Đọc inline 1 KiB (50 files)",
+      "count": 50,
+      "total_sec": 0.0004,
+      "per_op_ms": 0.007,
+      "per_op_us": 7.1,
+      "ops_sec": 141334.4,
+      "note": "141334.4 reads/s"
+    },
+    {
+      "category": "7. I/O Trung bình",
+      "operation": "Ghi 10 tệp 256 KiB (+ sync)",
+      "count": 10,
+      "total_sec": 2.7928,
+      "per_op_ms": 279.283,
+      "per_op_us": 279282.7,
+      "ops_sec": 3.6,
+      "note": "0.90 MiB/s"
+    },
+    {
+      "category": "7. I/O Trung bình",
+      "operation": "Đọc 10 tệp 256 KiB",
+      "count": 10,
+      "total_sec": 0.0008,
+      "per_op_ms": 0.084,
+      "per_op_us": 83.8,
+      "ops_sec": 11927.3,
+      "note": "2981.83 MiB/s"
+    },
+    {
+      "category": "8. I/O Tuần tự",
+      "operation": "Ghi 64 MiB vào Page Cache",
+      "count": 1,
+      "total_sec": 0.1159,
+      "per_op_ms": 115.862,
+      "per_op_us": 115861.6,
+      "ops_sec": 8.6,
+      "note": "552.38 MiB/s (RAM speed)"
+    },
+    {
+      "category": "8. I/O Tuần tự",
+      "operation": "sync/flush 64 MiB xuống USB",
+      "count": 1,
+      "total_sec": 9.8241,
+      "per_op_ms": 9824.125,
+      "per_op_us": 9824125.3,
+      "ops_sec": 0.1,
+      "note": "Flush qua writeback 128 KiB"
+    },
+    {
+      "category": "8. I/O Tuần tự",
+      "operation": "Ghi toàn phần 64 MiB + Flush",
+      "count": 1,
+      "total_sec": 9.94,
+      "per_op_ms": 9939.987,
+      "per_op_us": 9939987.0,
+      "ops_sec": 0.1,
+      "note": "6.44 MiB/s thực tế"
+    },
+    {
+      "category": "8. I/O Tuần tự",
+      "operation": "Đọc 64 MiB (Page Cache)",
+      "count": 1,
+      "total_sec": 0.0744,
+      "per_op_ms": 74.392,
+      "per_op_us": 74392.5,
+      "ops_sec": 13.4,
+      "note": "860.30 MiB/s (RAM Cache)"
+    },
+    {
+      "category": "9. Random I/O",
+      "operation": "Ghi ngẫu nhiên 4K + fsync (30 ops)",
+      "count": 30,
+      "total_sec": 60.2452,
+      "per_op_ms": 2008.174,
+      "per_op_us": 2008173.9,
+      "ops_sec": 0.5,
+      "note": "0.5 IOPS"
+    },
+    {
+      "category": "9. Random I/O",
+      "operation": "Đọc ngẫu nhiên 4K (30 ops)",
+      "count": 30,
+      "total_sec": 0.0005,
+      "per_op_ms": 0.016,
+      "per_op_us": 16.0,
+      "ops_sec": 62317.1,
+      "note": "62317.1 IOPS"
+    },
+    {
+      "category": "10. Sao chép",
+      "operation": "copy_file_range (16 MiB)",
+      "count": 1,
+      "total_sec": 2.1335,
+      "per_op_ms": 2133.534,
+      "per_op_us": 2133533.5,
+      "ops_sec": 0.5,
+      "note": "7.50 MiB/s"
+    },
+    {
+      "category": "11. Live Scrub",
+      "operation": "VTX_IOC_SCRUB trực tiếp",
+      "count": 1,
+      "total_sec": 4.3513,
+      "per_op_ms": 4351.326,
+      "per_op_us": 4351325.8,
+      "ops_sec": 0.2,
+      "note": "22314 blocks (5128 blks/s), 0 lỗi csum"
+    },
+    {
+      "category": "12. Cold Verify",
+      "operation": "Unmount RW",
+      "count": 1,
+      "total_sec": 5.3517,
+      "per_op_ms": 5351.723,
+      "per_op_us": 5351722.5,
+      "ops_sec": 0.2,
+      "note": "Xả sạch VFS buffer & checkpoint"
+    },
+    {
+      "category": "12. Cold Verify",
+      "operation": "drop_caches=3 (Xoá RAM)",
+      "count": 1,
+      "total_sec": 0.2649,
+      "per_op_ms": 264.911,
+      "per_op_us": 264911.0,
+      "ops_sec": 3.8,
+      "note": "Buộc đọc 100% từ tế bào nhớ flash"
+    },
+    {
+      "category": "12. Cold Verify",
+      "operation": "Cold mount (RO)",
+      "count": 1,
+      "total_sec": 0.6086,
+      "per_op_ms": 608.602,
+      "per_op_us": 608602.2,
+      "ops_sec": 1.6,
+      "note": "Mount chỉ đọc từ flash"
+    },
+    {
+      "category": "12. Cold Verify",
+      "operation": "Cold Read 64 MiB từ USB",
+      "count": 1,
+      "total_sec": 12.2351,
+      "per_op_ms": 12235.133,
+      "per_op_us": 12235133.0,
+      "ops_sec": 0.1,
+      "note": "5.23 MiB/s"
+    },
+    {
+      "category": "13. Kết thúc",
+      "operation": "umount cuối cùng",
+      "count": 1,
+      "total_sec": 0.0401,
+      "per_op_ms": 40.069,
+      "per_op_us": 40068.8,
+      "ops_sec": 25.0,
+      "note": "Gỡ kết nối sạch"
+    },
+    {
+      "category": "13. Kết thúc",
+      "operation": "fsck.vtxfs toàn diện",
+      "count": 1,
+      "total_sec": 4.1887,
+      "per_op_ms": 4188.701,
+      "per_op_us": 4188700.8,
+      "ops_sec": 0.2,
+      "note": "Cấu trúc 100% SẠCH, exit code 0"
+    },
+    {
+      "category": "14. Subvolume",
+      "operation": "subvolume create",
+      "count": 1,
+      "total_sec": 1.5848,
+      "per_op_ms": 1584.785,
+      "per_op_us": 1584785.4,
+      "ops_sec": 0.6,
+      "note": "Tạo subvolume 'subvol_bench' ID 3369"
+    },
+    {
+      "category": "14. Subvolume",
+      "operation": "subvolume list",
+      "count": 1,
+      "total_sec": 0.3535,
+      "per_op_ms": 353.52,
+      "per_op_us": 353520.0,
+      "ops_sec": 2.8,
+      "note": "Liệt kê danh sách subvolume"
+    },
+    {
+      "category": "14. Snapshot",
+      "operation": "snapshot create (RO)",
+      "count": 1,
+      "total_sec": 1.8574,
+      "per_op_ms": 1857.431,
+      "per_op_us": 1857430.9,
+      "ops_sec": 0.5,
+      "note": "Tạo snapshot Read-Only CoW tức thì (ID 3400)"
+    },
+    {
+      "category": "14. Snapshot",
+      "operation": "snapshot delete + reaper",
+      "count": 1,
+      "total_sec": 3.0646,
+      "per_op_ms": 3064.634,
+      "per_op_us": 3064633.8,
+      "ops_sec": 0.3,
+      "note": "Xoá snapshot ID 3400"
+    },
+    {
+      "category": "14. Subvolume",
+      "operation": "subvolume delete + reaper",
+      "count": 1,
+      "total_sec": 1.204,
+      "per_op_ms": 1204.011,
+      "per_op_us": 1204011.4,
+      "ops_sec": 0.8,
+      "note": "Xoá subvol ID 3369 và dọn dẹp reaper"
+    },
+    {
+      "category": "14. Subvolume",
+      "operation": "fsck sau subvolume/snap",
+      "count": 1,
+      "total_sec": 4.0946,
+      "per_op_ms": 4094.627,
+      "per_op_us": 4094626.7,
+      "ops_sec": 0.2,
+      "note": "Xác nhận toàn vẹn sau thao tác CoW"
+    }
+  ]
+}

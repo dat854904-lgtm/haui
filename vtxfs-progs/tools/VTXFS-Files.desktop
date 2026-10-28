@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=VTXFS Files (RAM Disk)
+Comment=VTXFS GUI file explorer on a RAM-backed virtual image
+Exec=sh /home/haui/Music/Downloads/VTXFS/vtxfs-progs/tools/run-vtxfs-files.sh
+Icon=folder
+Terminal=false
+Categories=Utility;FileManager;
+StartupNotify=true
